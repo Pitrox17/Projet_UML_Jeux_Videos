@@ -403,8 +403,8 @@ public class GameRentalApp {
 
         Sale sale = new Sale(
             UUID.randomUUID().toString(),
-            customer.getId(),
-            selectedGame.getId(),
+            customer,
+            selectedGame,
             LocalDate.now(),
             finalPrice
         );
