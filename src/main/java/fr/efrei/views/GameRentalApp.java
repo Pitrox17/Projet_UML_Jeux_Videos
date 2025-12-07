@@ -132,7 +132,9 @@ public class GameRentalApp {
             }
             System.out.println("✓ Customer found: " );
             return customer;
+
         }
+
 
         else if (ch == 2) {
             String name = Helper.read("Customer name");
@@ -167,6 +169,7 @@ public class GameRentalApp {
             Helper.line();
             System.out.println("\n=== CUSTOMER: " + customer.getName() + " ===");
             System.out.println("Loyalty Points: " + customer.getLoyaltyPoints());
+            pause(1);
             System.out.println("\n1) Rent a Game");
             System.out.println("2) Buy a Game");
             System.out.println("3) Return a Rental");
@@ -218,7 +221,7 @@ public class GameRentalApp {
 
         if (games.isEmpty()) {
             Helper.error("No games available for this platform");
-            pause(1/2);
+            pause(1);
             return;
         }
 
@@ -227,7 +230,7 @@ public class GameRentalApp {
             Game g = games.get(i);
             System.out.println((i + 1) + ") " + g.getTitle() + " - " + g.getGenre() + " - $" + g.getPrice() + "/day");
         }
-        pause(3/2);
+        pause(2);
 
         String gameChoice = Helper.read("Select game (number)");
         if (!Helper.isNumber(gameChoice)) {
@@ -239,7 +242,7 @@ public class GameRentalApp {
         int gameIdx = Integer.parseInt(gameChoice) - 1;
         if (gameIdx < 0 || gameIdx >= games.size()) {
             Helper.error("Invalid selection");
-            pause(1/2);
+            pause(1);
             return;
         }
 
@@ -254,7 +257,7 @@ public class GameRentalApp {
         String durationChoice = Helper.read("Your choice");
         if (!Helper.isNumber(durationChoice)) {
             Helper.error("Invalid choice");
-            pause(1/2);
+            pause(1);
             return;
         }
 
@@ -267,7 +270,7 @@ public class GameRentalApp {
             case 3: days = 30; price = selectedGame.getPrice() * 30 * 0.70; break;
             default:
                 Helper.error("Invalid choice");
-                pause(1/2);
+                pause(1);
                 return;
         }
 
@@ -279,7 +282,7 @@ public class GameRentalApp {
 
             System.out.println("\nYou have " + customer.getLoyaltyPoints() + " loyalty points");
             System.out.println("You can use up to " + pointsToUse + " points for $" + discount + " discount");
-            pause(1/3);
+            pause(1);
 
             String usePoints = Helper.read("Use loyalty points? (yes/no)");
             if ("yes".equalsIgnoreCase(usePoints)) {
@@ -287,7 +290,7 @@ public class GameRentalApp {
                 if (finalPrice < 0) finalPrice = 0;
                 customer.useLoyaltyPoints(pointsToUse);
                 System.out.println("✓ Applied $" + discount + " discount!");
-                pause(1/3);
+                pause(1);
             }
         }
 
@@ -296,7 +299,7 @@ public class GameRentalApp {
 
         if (!"yes".equalsIgnoreCase(confirm)) {
             System.out.println("Rental cancelled");
-            pause(1/2);
+            pause(1);
             return;
         }
 
@@ -343,7 +346,7 @@ public class GameRentalApp {
 
         if (games.isEmpty()) {
             Helper.error("No games available for sale on this platform");
-            pause(1/2);
+            pause(1);
             return;
         }
 
@@ -357,14 +360,14 @@ public class GameRentalApp {
         String gameChoice = Helper.read("Select game (number)");
         if (!Helper.isNumber(gameChoice)) {
             Helper.error("Invalid selection");
-            pause(1/2);
+            pause(1);
             return;
         }
 
         int gameIdx = Integer.parseInt(gameChoice) - 1;
         if (gameIdx < 0 || gameIdx >= games.size()) {
             Helper.error("Invalid selection");
-            pause(1/2);
+            pause(1);
             return;
         }
 
@@ -385,7 +388,7 @@ public class GameRentalApp {
                 if (finalPrice < 0) finalPrice = 0;
                 customer.useLoyaltyPoints(pointsToUse);
                 System.out.println("✓ Applied $" + discount + " discount!");
-                pause(1/3);
+                pause(1);
             }
         }
 
@@ -394,7 +397,7 @@ public class GameRentalApp {
 
         if (!"yes".equalsIgnoreCase(confirm)) {
             System.out.println("Purchase cancelled");
-            pause(1/2);
+            pause(1);
             return;
         }
 
@@ -418,10 +421,10 @@ public class GameRentalApp {
 
             System.out.println("✓ Purchase successful!");
             System.out.println("Earned " + pointsEarned + " loyalty points!");
-            pause(1/2);
+            pause(1);
         } else {
             Helper.error("Failed to process sale");
-            pause(1/2);
+            pause(1);
         }
     }
 
@@ -433,7 +436,7 @@ public class GameRentalApp {
 
         if (activeRentals.isEmpty()) {
             Helper.error("No active rentals for this customer");
-            pause(1/2);
+            pause(1);
             return;
         }
 
@@ -443,20 +446,20 @@ public class GameRentalApp {
             System.out.println((i + 1) + ") " + r.getGame().getTitle() +
                              " - Rented on: " + r.getRentalDate() +
                              " - Due: " + r.getReturnDate());
-            pause(1/2);
+            pause(1);
         }
 
         String choice = Helper.read("Select rental to return (number)");
         if (!Helper.isNumber(choice)) {
             Helper.error("Invalid selection");
-            pause(1/2);
+            pause(1);
             return;
         }
 
         int idx = Integer.parseInt(choice) - 1;
         if (idx < 0 || idx >= activeRentals.size()) {
             Helper.error("Invalid selection");
-            pause(1/2);
+            pause(1);
             return;
         }
 
@@ -474,14 +477,14 @@ public class GameRentalApp {
                 customerRepo.updateLoyaltyPoints(customer.getId(), customer.getLoyaltyPoints());
                 System.out.println("✓ Game returned successfully!");
                 System.out.println("Bonus: +50 loyalty points for returning on time!");
-                pause(1/2);
+                pause(1);
             } else {
                 System.out.println("✓ Game returned (late)");
-                pause(1/3);
+                pause(1);
             }
         } else {
             Helper.error("Failed to process return");
-            pause(1/2);
+            pause(1);
         }
     }
 
@@ -492,7 +495,7 @@ public class GameRentalApp {
 
         if (rentals.isEmpty()) {
             System.out.println("No rental history");
-            pause(1/2);
+            pause(1);
             return;
         }
 
@@ -504,7 +507,7 @@ public class GameRentalApp {
                              " | Due: " + r.getReturnDate() +
                              " | Status: " + status);
         }
-        pause(3/2);
+        pause(2);
     }
 
     private static void viewAllCustomers(CustomerRepository customerRepo) {
@@ -514,7 +517,7 @@ public class GameRentalApp {
 
         if (customers.isEmpty()) {
             System.out.println("No customers in database");
-            pause(1/2);
+            pause(1);
             return;
         }
 
@@ -524,7 +527,7 @@ public class GameRentalApp {
                              " | Phone: " + c.getContactNumber() +
                              " | Loyalty Points: " + c.getLoyaltyPoints());
         }
-        pause(3/2);
+        pause(2);
     }
 
     private static void viewRevenue(SaleRepository saleRepo, RentalRepository rentalRepo) {
@@ -538,7 +541,7 @@ public class GameRentalApp {
         System.out.println("Total Sales: " + totalSales);
         System.out.println("Total Rentals: " + totalRentals);
         System.out.println("Total Transactions: " + (totalSales + totalRentals));
-        pause(3/2);
+        pause(2);
     }
 
     private static GamePlatform choosePlatform() {
@@ -570,7 +573,7 @@ public class GameRentalApp {
             case 8 -> GamePlatform.PC_LINUX;
             default -> {
                 Helper.error("Invalid choice");
-                pause(1/2);
+                pause(1);
                 yield null;
             }
         };
