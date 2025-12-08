@@ -354,8 +354,9 @@ public class GameRentalApp {
         for (int i = 0; i < games.size(); i++) {
             Game g = games.get(i);
             System.out.println((i + 1) + ") " + g.getTitle() + " - " + g.getGenre() + " - $" + g.getPrice());
-            pause(2);
+
         }
+        pause(1);
 
         String gameChoice = Helper.read("Select game (number)");
         if (!Helper.isNumber(gameChoice)) {
@@ -446,8 +447,8 @@ public class GameRentalApp {
             System.out.println((i + 1) + ") " + r.getGame().getTitle() +
                              " - Rented on: " + r.getRentalDate() +
                              " - Due: " + r.getReturnDate());
-            pause(1);
         }
+        pause(1);
 
         String choice = Helper.read("Select rental to return (number)");
         if (!Helper.isNumber(choice)) {
@@ -517,7 +518,6 @@ public class GameRentalApp {
 
         if (customers.isEmpty()) {
             System.out.println("No customers in database");
-            pause(1);
             return;
         }
 
@@ -527,7 +527,7 @@ public class GameRentalApp {
                              " | Phone: " + c.getContactNumber() +
                              " | Loyalty Points: " + c.getLoyaltyPoints());
         }
-        pause(2);
+        pause(1);
     }
 
     private static void viewRevenue(SaleRepository saleRepo, RentalRepository rentalRepo) {
@@ -541,7 +541,7 @@ public class GameRentalApp {
         System.out.println("Total Sales: " + totalSales);
         System.out.println("Total Rentals: " + totalRentals);
         System.out.println("Total Transactions: " + (totalSales + totalRentals));
-        pause(2);
+        pause(1);
     }
 
     private static GamePlatform choosePlatform() {
@@ -554,7 +554,6 @@ public class GameRentalApp {
         System.out.println("6) PC Windows");
         System.out.println("7) PC Mac");
         System.out.println("8) PC Linux");
-        pause(1);
 
         String choice = Helper.read("Your choice");
         if (!Helper.isNumber(choice)) {
